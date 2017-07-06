@@ -3,7 +3,7 @@
 #include "..\Common\DeviceResources.h"
 #include <vector>
 
-namespace mapworld_DirectX_11_App_UniversalWindows_
+namespace mapworld
 {
 	class MapRenderer
 	{

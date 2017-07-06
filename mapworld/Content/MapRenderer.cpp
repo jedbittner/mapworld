@@ -3,7 +3,7 @@
 
 #include "..\Common\DirectXHelper.h"
 
-using namespace mapworld_DirectX_11_App_UniversalWindows_;
+using namespace mapworld;
 
 using namespace DirectX;
 using namespace Windows::Foundation;
