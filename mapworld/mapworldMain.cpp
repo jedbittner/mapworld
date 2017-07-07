@@ -40,6 +40,7 @@ void mapworldMain::CreateWindowSizeDependentResources()
 {
 	// TODO: Replace this with the size-dependent initialization of your app's content.
 	m_sceneRenderer->CreateWindowSizeDependentResources();
+	m_mapRenderer->CreateDeviceDependentResources();
 }
 
 // Updates the application state once per frame.
@@ -51,6 +52,7 @@ void mapworldMain::Update()
 		// TODO: Replace this with your app's content update functions.
 		m_sceneRenderer->Update(m_timer);
 		m_fpsTextRenderer->Update(m_timer);
+		m_mapRenderer->Update();
 	});
 }
 
@@ -80,6 +82,7 @@ bool mapworldMain::Render()
 
 	// Render the scene objects.
 	// TODO: Replace this with your app's content rendering functions.
+	m_mapRenderer->Render();
 	m_sceneRenderer->Render();
 	m_fpsTextRenderer->Render();
 
@@ -91,6 +94,7 @@ void mapworldMain::OnDeviceLost()
 {
 	m_sceneRenderer->ReleaseDeviceDependentResources();
 	m_fpsTextRenderer->ReleaseDeviceDependentResources();
+	m_mapRenderer->ReleaseDeviceDependentResources();
 }
 
 // Notifies renderers that device resources may now be recreated.
@@ -98,5 +102,6 @@ void mapworldMain::OnDeviceRestored()
 {
 	m_sceneRenderer->CreateDeviceDependentResources();
 	m_fpsTextRenderer->CreateDeviceDependentResources();
+	m_mapRenderer->CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
 }
