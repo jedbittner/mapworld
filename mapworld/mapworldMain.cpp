@@ -19,6 +19,8 @@ mapworldMain::mapworldMain(const std::shared_ptr<DX::DeviceResources>& deviceRes
 
 	m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(m_deviceResources));
 
+	m_mapRenderer = std::unique_ptr<MapRenderer>(new MapRenderer(m_deviceResources));
+
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:
 	/*
