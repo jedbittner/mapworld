@@ -14,6 +14,7 @@ using namespace Windows::UI::Input;
 using namespace Windows::System;
 using namespace Windows::Foundation;
 using namespace Windows::Graphics::Display;
+using namespace Windows::UI::ViewManagement;	// jedb: for calling TryEnterFullScreenMode()
 
 // The main function is only used to initialize our IFrameworkView class.
 [Platform::MTAThread]
@@ -125,6 +126,24 @@ void App::OnActivated(CoreApplicationView^ applicationView, IActivatedEventArgs^
 {
 	// Run() won't start until the CoreWindow is activated.
 	CoreWindow::GetForCurrentThread()->Activate();
+
+	ApplicationView^ view = ApplicationView::GetForCurrentView();
+	if (view->IsFullScreenMode)
+	{
+	}
+	else
+	{
+		if (view->TryEnterFullScreenMode())
+		{
+			ApplicationView::PreferredLaunchWindowingMode = ApplicationViewWindowingMode::FullScreen;
+			// The SizeChanged event will be raised when the entry to full-screen mode is complete.
+		}
+		else
+		{
+			ApplicationView::PreferredLaunchWindowingMode = ApplicationViewWindowingMode::FullScreen;
+			// The SizeChanged event will be raised when the entry to full-screen mode is complete.
+		}
+	}
 }
 
 void App::OnSuspending(Platform::Object^ sender, SuspendingEventArgs^ args)
