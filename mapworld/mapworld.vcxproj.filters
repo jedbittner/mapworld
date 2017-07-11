@@ -78,6 +78,9 @@
     <ClInclude Include="Content\MapRenderer.h">
       <Filter>Content</Filter>
     </ClInclude>
+    <ClInclude Include="Common\utility.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\StoreLogo.png">
