@@ -2,6 +2,7 @@
 #include "MapRenderer.h"
 
 #include "..\Common\DirectXHelper.h"
+#include "Common\utility.h"
 
 using namespace mapworld;
 
@@ -34,15 +35,13 @@ void MapRenderer::Render()
 	context->SaveDrawingState(m_stateBlock.Get());
 	context->BeginDraw();
 
-	D2D1_SIZE_F rtSize = context->GetSize();
-	FLOAT side = 32.0f;
-	FLOAT m_numberOfColumns = rtSize.width / side;
-	FLOAT m_numberOfRows = rtSize.height / side;
-	for (FLOAT y = 0; y <= m_numberOfRows * side; y += side)
+	FLOAT rightEdge = m_leftRightEdges + ((m_numberOfColumns - 1) * m_side);
+	FLOAT bottomEdge = m_topBottomEdges + ((m_numberOfRows - 1) * m_side);
+	for (FLOAT y = m_topBottomEdges; y <= bottomEdge; y += m_side)
 	{
-		for (FLOAT x = 0; x <= m_numberOfColumns * side; x += side)
+		for (FLOAT x = m_leftRightEdges; x <= rightEdge; x += m_side)
 		{
-			DrawTile(x, y, side, GetNextColor());
+			DrawTile(x, y, m_side, GetNextColor());
 		}
 	}
 
@@ -59,6 +58,20 @@ void MapRenderer::Render()
 
 void MapRenderer::CreateDeviceDependentResources()
 {
+	Windows::Foundation::Size logicalSize = m_deviceResources->GetLogicalSize();
+	m_numberOfColumns = 40;
+	m_numberOfRows = 22;
+	m_leftRightEdges = 25;
+	m_topBottomEdges = m_leftRightEdges;
+	FLOAT modifiedWidth = logicalSize.Width - (m_leftRightEdges * 2);
+	m_side = modifiedWidth / m_numberOfColumns;
+
+	Trace(L"columns %f\n", m_numberOfColumns);
+	Trace(L"rows %f\n", m_numberOfRows);
+	Trace(L"side %f\n", m_side);
+	Trace(L"left right edges %f\n", m_leftRightEdges);
+	Trace(L"top bottom edges %f\n", m_topBottomEdges);
+
 	DX::ThrowIfFailed(
 		m_deviceResources->GetD2DDeviceContext()->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &m_solidColorBrush)
 		);
