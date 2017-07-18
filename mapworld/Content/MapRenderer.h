@@ -21,8 +21,8 @@ namespace mapworld
 		Microsoft::WRL::ComPtr<ID2D1SolidColorBrush>    m_solidColorBrush;
 		std::vector<D2D1::ColorF>						m_tileColors;
 		std::vector<D2D1::ColorF>::iterator				m_it;
-		FLOAT m_numberOfColumns;
-		FLOAT m_numberOfRows;
+		INT	m_numberOfColumns;
+		INT m_numberOfRows;
 		FLOAT m_side;
 		FLOAT m_leftRightEdges;
 		FLOAT m_topBottomEdges;

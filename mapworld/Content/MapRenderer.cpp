@@ -35,14 +35,17 @@ void MapRenderer::Render()
 	context->SaveDrawingState(m_stateBlock.Get());
 	context->BeginDraw();
 
-	FLOAT rightEdge = m_leftRightEdges + ((m_numberOfColumns - 1) * m_side);
-	FLOAT bottomEdge = m_topBottomEdges + ((m_numberOfRows - 1) * m_side);
-	for (FLOAT y = m_topBottomEdges; y <= bottomEdge; y += m_side)
+	INT rowNumber = 0;
+	INT columnNumber = 0;
+	for (FLOAT y = m_topBottomEdges; rowNumber < m_numberOfRows; y += m_side)
 	{
-		for (FLOAT x = m_leftRightEdges; x <= rightEdge; x += m_side)
+		for (FLOAT x = m_leftRightEdges; columnNumber < m_numberOfColumns; x += m_side)
 		{
 			DrawTile(x, y, m_side, GetNextColor());
+			columnNumber++;
 		}
+		rowNumber++;
+		columnNumber = 0;
 	}
 
 	// Ignore D2DERR_RECREATE_TARGET here. This error indicates that the device
@@ -66,6 +69,8 @@ void MapRenderer::CreateDeviceDependentResources()
 	FLOAT modifiedWidth = logicalSize.Width - (m_leftRightEdges * 2);
 	m_side = modifiedWidth / m_numberOfColumns;
 
+	Trace(L"logical size width %f\n", logicalSize.Width);
+	Trace(L"logical size height %f\n", logicalSize.Height);
 	Trace(L"columns %f\n", m_numberOfColumns);
 	Trace(L"rows %f\n", m_numberOfRows);
 	Trace(L"side %f\n", m_side);
