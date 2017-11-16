@@ -72,8 +72,8 @@ void MapRenderer::CreateDeviceDependentResources()
 
 	Trace(L"logical size width %f\n", logicalSize.Width);
 	Trace(L"logical size height %f\n", logicalSize.Height);
-	Trace(L"columns %f\n", m_numberOfColumns);
-	Trace(L"rows %f\n", m_numberOfRows);
+	Trace(L"columns %d\n", m_numberOfColumns);
+	Trace(L"rows %d\n", m_numberOfRows);
 	Trace(L"side %f\n", m_side);
 	Trace(L"left right edges %f\n", m_leftRightEdges);
 	Trace(L"top bottom edges %f\n", m_topBottomEdges);
